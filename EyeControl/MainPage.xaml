@@ -1,0 +1,376 @@
+﻿<Page
+    x:Class="EyeControl.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:EyeControl"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.5*" />
+            <RowDefinition Height="0.2*" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <Grid Background="LightGray" Grid.Row="0">
+            <Viewbox Stretch="Uniform" HorizontalAlignment="Left" VerticalAlignment="Stretch">
+                <TextBlock Foreground="DimGray" FontFamily="Segoe UI Light"/>
+            </Viewbox>
+        </Grid>
+        <Grid Background="#FF4B4B4B" Grid.Row="1" BorderBrush="Gray" BorderThickness="7,0,0,1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="0.2*" />
+            </Grid.ColumnDefinitions>
+            <Viewbox Stretch="Uniform" VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Column="0">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Foreground="White" Text="{x:Bind Path=userScreen.lineSection.line, Mode=OneWay}"/>
+                    <Border Background="Gray">
+                        <TextBlock Foreground="LightGray" Text="{x:Bind userScreen.lineSection.lineComplete, Mode=OneWay}"/>
+                    </Border>
+                </StackPanel>
+            </Viewbox>
+            <Viewbox Stretch="Uniform" Grid.Column="1">
+                <Button x:Name="playButton" Click="Play" Height="20">
+                    <Button.Background>
+                        <ImageBrush Stretch="UniformToFill" ImageSource="Assets/speak.png"/>
+                    </Button.Background>
+                </Button>
+            </Viewbox>
+        </Grid>
+        <Grid Background="White" Grid.Row="2">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1*" />
+                    <RowDefinition Height="1*" />
+                    <RowDefinition Height="1*" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*" />
+                    <ColumnDefinition Width="1*" />
+                    <ColumnDefinition Width="1*" />
+                </Grid.ColumnDefinitions>
+                <Grid Grid.Row="0" Grid.Column="1">
+                    <Ellipse PointerPressed="northEvent" Fill="LightGray" Margin="5" Stretch="Uniform" Stroke="DimGray" StrokeThickness="5"/>
+                    <RelativePanel Margin="0" PointerPressed="northEvent">
+                        <Grid RelativePanel.AlignHorizontalCenterWithPanel="True" RelativePanel.AlignVerticalCenterWithPanel="True" Margin="5" Width="100">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="1*"/>
+                                <RowDefinition Height="1*"/>
+                                <RowDefinition Height="1*"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="1*"/>
+                                <ColumnDefinition Width="1*"/>
+                                <ColumnDefinition Width="1*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid Grid.Row="0" Grid.Column="1">
+                                <Viewbox Stretch="Uniform" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                    <TextBlock Foreground="DimGray" Text="{x:Bind userScreen.clusterSection.north.up, Mode=OneWay}"/>
+                                </Viewbox>
+                                <Viewbox Stretch="Uniform" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                    <Image Source="{x:Bind userScreen.clusterSection.north.upImg, Mode=OneWay}"/>
+                                </Viewbox>
+                            </Grid>
+                            <Grid Grid.Row="1" Grid.Column="1">
+                                <Viewbox Stretch="Uniform" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                    <TextBlock Foreground="White" Text="{x:Bind userScreen.clusterSection.north.center, Mode=OneWay}"/>
+                                </Viewbox>
+                                <Viewbox Stretch="Uniform" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                    <Image Source="{x:Bind userScreen.clusterSection.north.centerImg, Mode=OneWay}"/>
+                                </Viewbox>
+                            </Grid>
+                            <Grid Grid.Row="2" Grid.Column="1">
+                                <Viewbox Stretch="Uniform" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                    <TextBlock Foreground="Orange" Text="{x:Bind userScreen.clusterSection.north.down, Mode=OneWay}"/>
+                                </Viewbox>
+                                <Viewbox Stretch="Uniform" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                    <Image Source="{x:Bind userScreen.clusterSection.north.downImg, Mode=OneWay}"/>
+                                </Viewbox>
+                            </Grid>
+                            <Grid Grid.Row="1" Grid.Column="0">
+                                <Viewbox Stretch="Uniform" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                    <TextBlock Foreground="Gray" Text="{x:Bind userScreen.clusterSection.north.left, Mode=OneWay}"/>
+                                </Viewbox>
+                                <Viewbox Stretch="Uniform" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                    <Image Source="{x:Bind userScreen.clusterSection.north.leftImg, Mode=OneWay}"/>
+                                </Viewbox>
+                            </Grid>
+                            <Grid Grid.Row="1" Grid.Column="2">
+                                <Viewbox Stretch="Uniform" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                    <TextBlock Foreground="DarkOrange" Text="{x:Bind userScreen.clusterSection.north.right, Mode=OneWay}"/>
+                                </Viewbox>
+                                <Viewbox Stretch="Uniform" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                    <Image Source="{x:Bind userScreen.clusterSection.north.rightImg, Mode=OneWay}"/>
+                                </Viewbox>
+                            </Grid>
+                        </Grid>
+                        <Viewbox RelativePanel.AlignHorizontalCenterWithPanel="True" RelativePanel.AlignVerticalCenterWithPanel="True" Margin="7">
+                            <TextBlock Foreground="DimGray" Text="{x:Bind userScreen.clusterSection.north.single, Mode=OneWay}"/>
+                        </Viewbox>
+                        <Viewbox Margin="20" RelativePanel.AlignHorizontalCenterWithPanel="True" RelativePanel.AlignVerticalCenterWithPanel="True">
+                            <Image Source="{x:Bind userScreen.clusterSection.north.singleImg, Mode=OneWay}"/>
+                        </Viewbox>
+                    </RelativePanel>
+                </Grid>
+                <Grid Grid.Row="1">
+                    <Ellipse PointerPressed="westEvent" Fill="LightGray" Margin="5" Stretch="Uniform" Stroke="Gray" StrokeThickness="5"/>
+                    <RelativePanel Margin="0" PointerPressed="westEvent">
+                        <Grid RelativePanel.AlignHorizontalCenterWithPanel="True" RelativePanel.AlignVerticalCenterWithPanel="True" Margin="5" Width="100">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="1*"/>
+                                <RowDefinition Height="1*"/>
+                                <RowDefinition Height="1*"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="1*"/>
+                                <ColumnDefinition Width="1*"/>
+                                <ColumnDefinition Width="1*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid Grid.Row="0" Grid.Column="1">
+                                <Viewbox Stretch="Uniform" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                    <TextBlock Foreground="DimGray" Text="{x:Bind userScreen.clusterSection.west.up, Mode=OneWay}"/>
+                                </Viewbox>
+                                <Viewbox Stretch="Uniform" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                    <Image Source="{x:Bind userScreen.clusterSection.west.upImg, Mode=OneWay}"/>
+                                </Viewbox>
+                            </Grid>
+                            <Grid Grid.Row="1" Grid.Column="1">
+                                <Viewbox Stretch="Uniform" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                    <TextBlock Foreground="White" Text="{x:Bind userScreen.clusterSection.west.center, Mode=OneWay}"/>
+                                </Viewbox>
+                                <Viewbox Stretch="Uniform" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                    <Image Source="{x:Bind userScreen.clusterSection.west.centerImg, Mode=OneWay}"/>
+                                </Viewbox>
+                            </Grid>
+                            <Grid Grid.Row="2" Grid.Column="1">
+                                <Viewbox Stretch="Uniform" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                    <TextBlock Foreground="Orange" Text="{x:Bind userScreen.clusterSection.west.down, Mode=OneWay}"/>
+                                </Viewbox>
+                                <Viewbox Stretch="Uniform" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                    <Image Source="{x:Bind userScreen.clusterSection.west.downImg, Mode=OneWay}"/>
+                                </Viewbox>
+                            </Grid>
+                            <Grid Grid.Row="1" Grid.Column="0">
+                                <Viewbox Stretch="Uniform" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                    <TextBlock Foreground="Gray" Text="{x:Bind userScreen.clusterSection.west.left, Mode=OneWay}"/>
+                                </Viewbox>
+                                <Viewbox Stretch="Uniform" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                    <Image Source="{x:Bind userScreen.clusterSection.west.leftImg, Mode=OneWay}"/>
+                                </Viewbox>
+                            </Grid>
+                            <Grid Grid.Row="1" Grid.Column="2">
+                                <Viewbox Stretch="Uniform" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                    <TextBlock Foreground="DarkOrange" Text="{x:Bind userScreen.clusterSection.west.right, Mode=OneWay}"/>
+                                </Viewbox>
+                                <Viewbox Stretch="Uniform" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                    <Image Source="{x:Bind userScreen.clusterSection.west.rightImg, Mode=OneWay}"/>
+                                </Viewbox>
+                            </Grid>
+                        </Grid>
+                        <Viewbox RelativePanel.AlignHorizontalCenterWithPanel="True" RelativePanel.AlignVerticalCenterWithPanel="True" Margin="7">
+                            <TextBlock Foreground="Gray" Text="{x:Bind userScreen.clusterSection.west.single, Mode=OneWay}"/>
+                        </Viewbox>
+                        <Viewbox Margin="20" RelativePanel.AlignHorizontalCenterWithPanel="True" RelativePanel.AlignVerticalCenterWithPanel="True">
+                            <Image Source="{x:Bind userScreen.clusterSection.west.singleImg, Mode=OneWay}"/>
+                        </Viewbox>
+                    </RelativePanel>
+                </Grid>
+                <Grid Grid.Row="1" Grid.Column="1">
+                    <Ellipse PointerPressed="centerEvent" Fill="LightGray" Margin="5" Stretch="Uniform" Stroke="White" StrokeThickness="5"/>
+                    <RelativePanel Margin="0" PointerPressed="centerEvent">
+                        <Grid RelativePanel.AlignHorizontalCenterWithPanel="True" RelativePanel.AlignVerticalCenterWithPanel="True" Margin="5" Width="100">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="1*"/>
+                                <RowDefinition Height="1*"/>
+                                <RowDefinition Height="1*"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="1*"/>
+                                <ColumnDefinition Width="1*"/>
+                                <ColumnDefinition Width="1*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid Grid.Row="0" Grid.Column="1">
+                                <Viewbox Stretch="Uniform" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                    <TextBlock Foreground="DimGray" Text="{x:Bind userScreen.clusterSection.center.up, Mode=OneWay}"/>
+                                </Viewbox>
+                                <Viewbox Stretch="Uniform" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                    <Image Source="{x:Bind userScreen.clusterSection.center.upImg, Mode=OneWay}"/>
+                                </Viewbox>
+                            </Grid>
+                            <Grid Grid.Row="1" Grid.Column="1">
+                                <Viewbox Stretch="Uniform" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                    <TextBlock Foreground="White" Text="{x:Bind userScreen.clusterSection.center.center, Mode=OneWay}"/>
+                                </Viewbox>
+                                <Viewbox Stretch="Uniform" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                    <Image Source="{x:Bind userScreen.clusterSection.center.centerImg, Mode=OneWay}"/>
+                                </Viewbox>
+                            </Grid>
+                            <Grid Grid.Row="2" Grid.Column="1">
+                                <Viewbox Stretch="Uniform" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                    <TextBlock Foreground="Orange" Text="{x:Bind userScreen.clusterSection.center.down, Mode=OneWay}"/>
+                                </Viewbox>
+                                <Viewbox Stretch="Uniform" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                    <Image Source="{x:Bind userScreen.clusterSection.center.downImg, Mode=OneWay}"/>
+                                </Viewbox>
+                            </Grid>
+                            <Grid Grid.Row="1" Grid.Column="0">
+                                <Viewbox Stretch="Uniform" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                    <TextBlock Foreground="Gray" Text="{x:Bind userScreen.clusterSection.center.left, Mode=OneWay}"/>
+                                </Viewbox>
+                                <Viewbox Stretch="Uniform" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                    <Image Source="{x:Bind userScreen.clusterSection.center.leftImg, Mode=OneWay}"/>
+                                </Viewbox>
+                            </Grid>
+                            <Grid Grid.Row="1" Grid.Column="2">
+                                <Viewbox Stretch="Uniform" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                    <TextBlock Foreground="DarkOrange" Text="{x:Bind userScreen.clusterSection.center.right, Mode=OneWay}"/>
+                                </Viewbox>
+                                <Viewbox Stretch="Uniform" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                    <Image Source="{x:Bind userScreen.clusterSection.center.rightImg, Mode=OneWay}"/>
+                                </Viewbox>
+                            </Grid>
+                        </Grid>
+                        <Viewbox RelativePanel.AlignHorizontalCenterWithPanel="True" RelativePanel.AlignVerticalCenterWithPanel="True" Margin="7">
+                            <TextBlock Foreground="White" Text="{x:Bind userScreen.clusterSection.center.single, Mode=OneWay}"/>
+                        </Viewbox>
+                        <Viewbox Margin="20" RelativePanel.AlignHorizontalCenterWithPanel="True" RelativePanel.AlignVerticalCenterWithPanel="True">
+                            <Image Source="{x:Bind userScreen.clusterSection.center.singleImg, Mode=OneWay}"/>
+                        </Viewbox>
+                    </RelativePanel>
+                </Grid>
+                <Grid Grid.Row="1" Grid.Column="2">
+                    <Ellipse PointerPressed="eastEvent" Fill="LightGray" Margin="5" Stretch="Uniform" Stroke="DarkOrange" StrokeThickness="5"/>
+                    <RelativePanel Margin="0" PointerPressed="eastEvent">
+                        <Grid RelativePanel.AlignHorizontalCenterWithPanel="True" RelativePanel.AlignVerticalCenterWithPanel="True" Margin="5" Width="100">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="1*"/>
+                                <RowDefinition Height="1*"/>
+                                <RowDefinition Height="1*"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="1*"/>
+                                <ColumnDefinition Width="1*"/>
+                                <ColumnDefinition Width="1*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid Grid.Row="0" Grid.Column="1">
+                                <Viewbox Stretch="Uniform" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                    <TextBlock Foreground="DimGray" Text="{x:Bind userScreen.clusterSection.east.up, Mode=OneWay}"/>
+                                </Viewbox>
+                                <Viewbox Stretch="Uniform" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                    <Image Source="{x:Bind userScreen.clusterSection.east.upImg, Mode=OneWay}"/>
+                                </Viewbox>
+                            </Grid>
+                            <Grid Grid.Row="1" Grid.Column="1">
+                                <Viewbox Stretch="Uniform" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                    <TextBlock Foreground="White" Text="{x:Bind userScreen.clusterSection.east.center, Mode=OneWay}"/>
+                                </Viewbox>
+                                <Viewbox Stretch="Uniform" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                    <Image Source="{x:Bind userScreen.clusterSection.east.centerImg, Mode=OneWay}"/>
+                                </Viewbox>
+                            </Grid>
+                            <Grid Grid.Row="2" Grid.Column="1">
+                                <Viewbox Stretch="Uniform" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                    <TextBlock Foreground="Orange" Text="{x:Bind userScreen.clusterSection.east.down, Mode=OneWay}"/>
+                                </Viewbox>
+                                <Viewbox Stretch="Uniform" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                    <Image Source="{x:Bind userScreen.clusterSection.east.downImg, Mode=OneWay}"/>
+                                </Viewbox>
+                            </Grid>
+                            <Grid Grid.Row="1" Grid.Column="0">
+                                <Viewbox Stretch="Uniform" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                    <TextBlock Foreground="Gray" Text="{x:Bind userScreen.clusterSection.east.left, Mode=OneWay}"/>
+                                </Viewbox>
+                                <Viewbox Stretch="Uniform" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                    <Image Source="{x:Bind userScreen.clusterSection.east.leftImg, Mode=OneWay}"/>
+                                </Viewbox>
+                            </Grid>
+                            <Grid Grid.Row="1" Grid.Column="2">
+                                <Viewbox Stretch="Uniform" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                    <TextBlock Foreground="DarkOrange" Text="{x:Bind userScreen.clusterSection.east.right, Mode=OneWay}"/>
+                                </Viewbox>
+                                <Viewbox Stretch="Uniform" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                    <Image Source="{x:Bind userScreen.clusterSection.east.rightImg, Mode=OneWay}"/>
+                                </Viewbox>
+                            </Grid>
+                        </Grid>
+                        <Viewbox RelativePanel.AlignHorizontalCenterWithPanel="True" RelativePanel.AlignVerticalCenterWithPanel="True" Margin="7">
+                            <TextBlock Foreground="DarkOrange" Text="{x:Bind userScreen.clusterSection.east.single, Mode=OneWay}"/>
+                        </Viewbox>
+                        <Viewbox Margin="20" RelativePanel.AlignHorizontalCenterWithPanel="True" RelativePanel.AlignVerticalCenterWithPanel="True">
+                            <Image Source="{x:Bind userScreen.clusterSection.east.singleImg, Mode=OneWay}"/>
+                        </Viewbox>
+                    </RelativePanel>
+                </Grid>
+
+                <Grid Grid.Row="2" Grid.Column="1">
+                    <Ellipse PointerPressed="southEvent" Fill="LightGray" Margin="5" Stretch="Uniform" Stroke="Orange" StrokeThickness="5"/>
+                    <RelativePanel Margin="0" PointerPressed="southEvent">
+                        <Grid RelativePanel.AlignHorizontalCenterWithPanel="True" RelativePanel.AlignVerticalCenterWithPanel="True" Margin="5" Width="100">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="1*"/>
+                                <RowDefinition Height="1*"/>
+                                <RowDefinition Height="1*"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="1*"/>
+                                <ColumnDefinition Width="1*"/>
+                                <ColumnDefinition Width="1*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid Grid.Row="0" Grid.Column="1">
+                                <Viewbox Stretch="Uniform" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                    <TextBlock Foreground="DimGray" Text="{x:Bind userScreen.clusterSection.south.up, Mode=OneWay}"/>
+                                </Viewbox>
+                                <Viewbox Stretch="Uniform" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                    <Image Source="{x:Bind userScreen.clusterSection.south.upImg, Mode=OneWay}"/>
+                                </Viewbox>
+                            </Grid>
+                            <Grid Grid.Row="1" Grid.Column="1">
+                                <Viewbox Stretch="Uniform" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                    <TextBlock Foreground="White" Text="{x:Bind userScreen.clusterSection.south.center, Mode=OneWay}"/>
+                                </Viewbox>
+                                <Viewbox Stretch="Uniform" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                    <Image Source="{x:Bind userScreen.clusterSection.south.centerImg, Mode=OneWay}"/>
+                                </Viewbox>
+                            </Grid>
+                            <Grid Grid.Row="2" Grid.Column="1">
+                                <Viewbox Stretch="Uniform" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                    <TextBlock Foreground="Orange" Text="{x:Bind userScreen.clusterSection.south.down, Mode=OneWay}"/>
+                                </Viewbox>
+                                <Viewbox Stretch="Uniform" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                    <Image Source="{x:Bind userScreen.clusterSection.south.downImg, Mode=OneWay}"/>
+                                </Viewbox>
+                            </Grid>
+                            <Grid Grid.Row="1" Grid.Column="0">
+                                <Viewbox Stretch="Uniform" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                    <TextBlock Foreground="Gray" Text="{x:Bind userScreen.clusterSection.south.left, Mode=OneWay}"/>
+                                </Viewbox>
+                                <Viewbox Stretch="Uniform" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                    <Image Source="{x:Bind userScreen.clusterSection.south.leftImg, Mode=OneWay}"/>
+                                </Viewbox>
+                            </Grid>
+                            <Grid Grid.Row="1" Grid.Column="2">
+                                <Viewbox Stretch="Uniform" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                    <TextBlock Foreground="DarkOrange" Text="{x:Bind userScreen.clusterSection.south.right, Mode=OneWay}"/>
+                                </Viewbox>
+                                <Viewbox Stretch="Uniform" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                    <Image Source="{x:Bind userScreen.clusterSection.south.rightImg, Mode=OneWay}"/>
+                                </Viewbox>
+                            </Grid>
+                        </Grid>
+                        <Viewbox RelativePanel.AlignHorizontalCenterWithPanel="True" RelativePanel.AlignVerticalCenterWithPanel="True" Margin="7">
+                            <TextBlock Foreground="Orange" Text="{x:Bind userScreen.clusterSection.south.single, Mode=OneWay}"/>
+                        </Viewbox>
+                        <Viewbox Margin="20" RelativePanel.AlignHorizontalCenterWithPanel="True" RelativePanel.AlignVerticalCenterWithPanel="True">
+                            <Image Source="{x:Bind userScreen.clusterSection.south.singleImg, Mode=OneWay}"/>
+                        </Viewbox>
+                    </RelativePanel>
+                </Grid>
+
+            </Grid>
+        </Grid>
+    </Grid>
+</Page>
