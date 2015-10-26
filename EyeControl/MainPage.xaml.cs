@@ -29,16 +29,28 @@ namespace EyeControl
             userScreen.test();
         }
 
-        private void Play(object sender, RoutedEventArgs e)
+        /// <summary>
+        /// this is invoked when the media element state is changing
+        /// </summary>
+        /// <remarks>
+        /// this simply is looking for the media element to go to a paused state, then it can enable the button
+        /// </remarks>
+        /// <param name="sender">unused object parameter</param>
+        /// <param name="e">unused object parameter</param>
+        void media_CurrentStateChanged(object sender, RoutedEventArgs e)
         {
-            //if (lineViewTxt.Text == "")
-            //{
-            //    return;
-            //}
-            //logViewTxt.Text += "\n"+lineViewTxt.Text;
-            //this._ClearLineView();
+            if (this.media.CurrentState == Windows.UI.Xaml.Media.MediaElementState.Paused)
+            {
+                this.speakButton.IsEnabled = true;
+                this.media.CurrentStateChanged -= this.media_CurrentStateChanged;
+            }
         }
-        
+
+        private void HamburgerButton_Click(object sender, RoutedEventArgs e)
+        {
+            MainSplitView.IsPaneOpen = !MainSplitView.IsPaneOpen;
+        }
+
         private void northEvent(object sender, RoutedEventArgs e)
         {
             userScreen.HandleClusterEvent(userScreen.clusterSection.north);
@@ -66,7 +78,7 @@ namespace EyeControl
 
         private void SpeakEvent(object sender, RoutedEventArgs e)
         {
-            userScreen.HandleSpeakEvent();
+            userScreen.HandleSpeakEvent(this.media);
         }
     }
 }

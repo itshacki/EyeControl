@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.Media.SpeechSynthesis;
+using Windows.UI.Popups;
+using Windows.UI.Xaml.Controls;
 
 namespace EyeControl
 {
@@ -133,6 +136,9 @@ namespace EyeControl
         private ILogSection _logSection = new LogSection();
         private ILineSection _lineSection = new LineSection();
 
+        // The object for controlling the speech synthesis engine (voice).
+        private SpeechSynthesizer synth = new SpeechSynthesizer();
+
         public ILogSection logSection { get { return this._logSection; } set { logSection = this._logSection; } }
         public ILineSection lineSection { get { return _lineSection; } set { lineSection = _lineSection; } }
         public IClusterSection clusterSection { get { return this._clusterSection; } set { clusterSection = this._clusterSection; } }
@@ -159,10 +165,23 @@ namespace EyeControl
             clusterSection.center.SetImgElements(currentPage.center);
         }
 
-        public void HandleSpeakEvent()
+        public async void HandleSpeakEvent(MediaElement mediaElement)
         {
-            loggedInUser.UpdateVocbulary(lineSection.line + lineSection.lineComplete);
-            logSection.AddLineToLog(lineSection.line + lineSection.lineComplete);
+            string currentLine = lineSection.line + lineSection.lineComplete;
+            SpeechSynthesisStream stream = await synth.SynthesizeTextToStreamAsync(currentLine);
+            // if the SSML stream is not in the correct format throw an error message to the user
+            if (stream == null)
+            {
+                MessageDialog dialog = new MessageDialog("unable to synthesize text");
+                await dialog.ShowAsync();
+                return;
+            }
+            // start this audio stream playing
+            mediaElement.AutoPlay = true;
+            mediaElement.SetSource(stream, stream.ContentType);
+            mediaElement.Play();
+            loggedInUser.UpdateVocbulary(currentLine);
+            logSection.AddLineToLog(currentLine);
             lineSection.EnterLine();
         }
 

@@ -6,7 +6,51 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
-
+    
+    <SplitView x:Name="MainSplitView" DisplayMode="CompactOverlay"  IsPaneOpen="False" 
+               CompactPaneLength="50">
+        <SplitView.Pane>
+            <StackPanel Background="Gray">
+                <Button x:Name="HamburgerButton" FontFamily="Segoe MDL2 Assets" Content="&#xE700;" FontSize="20"
+                    Width="50" Height="50" Background="Transparent" Click="HamburgerButton_Click"/>
+                <StackPanel Orientation="Horizontal">
+                    <Button x:Name="MenuNextPage" FontFamily="Segoe MDL2 Assets" Content="&#xE72A;" FontSize="20"
+                    Width="50" Height="50" Background="Transparent"/>
+                    <TextBlock Text="Next Page" FontSize="18" VerticalAlignment="Center" />
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Button x:Name="MenuPreviousPage" FontFamily="Segoe MDL2 Assets" Content="&#xE72B;" FontSize="20"
+                        Width="50" Height="50" Background="Transparent"/>
+                    <TextBlock Text="Previous Page" FontSize="18" VerticalAlignment="Center" />
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Button x:Name="MenuHomePage" FontFamily="Segoe MDL2 Assets" Content="&#xE10F;" FontSize="20"
+                        Width="50" Height="50" Background="Transparent"/>
+                    <TextBlock Text="Home Page" FontSize="18" VerticalAlignment="Center" />
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Button x:Name="MenuWordCompletion" FontFamily="Segoe MDL2 Assets" Content="&#xE7E6;" FontSize="20"
+                        Width="50" Height="50" Background="Transparent"/>
+                    <TextBlock Text="Word completion" FontSize="18" VerticalAlignment="Center" />
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Button x:Name="MenuWordSuggestion" FontFamily="Segoe MDL2 Assets" Content="&#xE71C;" FontSize="20"
+                        Width="50" Height="50" Background="Transparent"/>
+                    <TextBlock Text="Word Suggestion" FontSize="18" VerticalAlignment="Center" />
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Button x:Name="MenuSilentMode" FontFamily="Segoe MDL2 Assets" Content="&#xE74F;" FontSize="20"
+                        Width="50" Height="50" Background="Transparent"/>
+                    <TextBlock Text="Silent mode" FontSize="18" VerticalAlignment="Center" />
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Button x:Name="MenuLanguage" FontFamily="Segoe MDL2 Assets" Content="&#xE8C1;" FontSize="20"
+                        Width="50" Height="50" Background="Transparent"/>
+                    <TextBlock Text="Language" FontSize="18" VerticalAlignment="Center" />
+                </StackPanel>
+            </StackPanel>
+        </SplitView.Pane>
+        <SplitView.Content>
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
         <Grid.RowDefinitions>
@@ -34,11 +78,12 @@
                 </StackPanel>
             </Viewbox>
             <Viewbox Stretch="Uniform" Grid.Column="1">
-                <Button x:Name="playButton" Click="SpeakEvent" Height="20">
-                    <Button.Background>
-                        <ImageBrush Stretch="UniformToFill" ImageSource="Assets/speak.png"/>
-                    </Button.Background>
-                </Button>
+                <StackPanel>
+                    <MediaElement x:Name="media" AutoPlay="False" CurrentStateChanged="media_CurrentStateChanged"/>
+                    <Button x:Name="speakButton" Foreground="LightGray" Click="SpeakEvent"  Width="50" Height="50" Background="Transparent"
+                FontFamily="Segoe MDL2 Assets" Content="&#xE767;"  FontSize="30"/>
+                </StackPanel>
+                
             </Viewbox>
         </Grid>
         <Grid Background="White" Grid.Row="2">
@@ -373,4 +418,6 @@
             </Grid>
         </Grid>
     </Grid>
+        </SplitView.Content>
+    </SplitView>
 </Page>

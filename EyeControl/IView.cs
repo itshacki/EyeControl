@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.UI.Xaml.Controls;
 
 namespace EyeControl
 {
@@ -120,7 +121,7 @@ namespace EyeControl
 
         void HandleClusterEvent(ICluster cluster);
 
-        void HandleSpeakEvent();
+        void HandleSpeakEvent(MediaElement mediaElement);
 
         void test();
     }
