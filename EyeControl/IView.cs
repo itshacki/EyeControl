@@ -73,10 +73,12 @@ namespace EyeControl
     /// <summary>
     /// Defines the log view of the log screen section
     /// </summary>
-    public interface ILogSection
+    public interface ILogSection : INotifyPropertyChanged
     {
         // the log that will apear at the log screen section
-        List<string> lines { get; set; }
+        string logLines { get; set; }
+
+        void AddLineToLog(string line);
     }
 
     /// <summary>
@@ -117,6 +119,8 @@ namespace EyeControl
         void SetPage(int pageIndex);
 
         void HandleClusterEvent(ICluster cluster);
+
+        void HandleSpeakEvent();
 
         void test();
     }

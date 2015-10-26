@@ -115,6 +115,8 @@ namespace EyeControl
         {
             Dictionary<string, int> reducedDict = ReduceVocabularyByPrefix(prefix);
             var sortedDict = from entry in reducedDict orderby entry.Value ascending select entry;
+            if (sortedDict.Count() == 0)
+                return "";
             return sortedDict.Last().Key;
         }
     }
@@ -155,6 +157,13 @@ namespace EyeControl
             clusterSection.east.SetImgElements(currentPage.east);
             clusterSection.west.SetImgElements(currentPage.west);
             clusterSection.center.SetImgElements(currentPage.center);
+        }
+
+        public void HandleSpeakEvent()
+        {
+            loggedInUser.UpdateVocbulary(lineSection.line + lineSection.lineComplete);
+            logSection.AddLineToLog(lineSection.line + lineSection.lineComplete);
+            lineSection.EnterLine();
         }
 
         public void HandleClusterEvent(ICluster cluster)

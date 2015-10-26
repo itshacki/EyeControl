@@ -10,17 +10,23 @@ namespace EyeControl
 {
     class LogSection : ILogSection
     {
-        private List<string> lines;
-        
-        List<string> ILogSection.lines { get { return lines; } set { lines = value; } }
-        
-        public void AddLogLine(string line)
+        private string _logLines;
+
+        public event PropertyChangedEventHandler PropertyChanged = delegate { };
+        public string logLines { get { return _logLines; } set { _logLines = value; NotifyPropertyChanged(); } }
+
+        private void NotifyPropertyChanged([CallerMemberName] String propertyName = "")
         {
-            if (lines.Count >=5)
+            if (PropertyChanged != null)
             {
-                lines.RemoveAt(5);
+                // Raise the PropertyChanged event, passing the name of the property whose value has changed.
+                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
             }
-            lines.Insert(0, line);
+        }
+
+        public void AddLineToLog(string line)
+        {
+            logLines = logLines + "\n" + line;
         }
     }
 
@@ -60,7 +66,10 @@ namespace EyeControl
 
         public void UpdateLineComplete(string wordComplete)
         {
-            lineComplete = wordComplete;
+            if (wordComplete != "")
+                lineComplete = wordComplete.Substring(line.Length);
+            else
+                lineComplete = "";
         }
     }
 

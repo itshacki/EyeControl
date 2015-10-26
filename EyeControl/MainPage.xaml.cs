@@ -64,5 +64,9 @@ namespace EyeControl
             userScreen.HandleClusterEvent(userScreen.clusterSection.center);
         }
 
+        private void SpeakEvent(object sender, RoutedEventArgs e)
+        {
+            userScreen.HandleSpeakEvent();
+        }
     }
 }

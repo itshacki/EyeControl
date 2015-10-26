@@ -17,7 +17,7 @@
 
         <Grid Background="LightGray" Grid.Row="0">
             <Viewbox Stretch="Uniform" HorizontalAlignment="Left" VerticalAlignment="Stretch">
-                <TextBlock Foreground="DimGray" FontFamily="Segoe UI Light"/>
+                <TextBlock Foreground="DimGray" FontFamily="Segoe UI Light" Text="{x:Bind Path=userScreen.logSection.logLines, Mode=OneWay}"/>
             </Viewbox>
         </Grid>
         <Grid Background="#FF4B4B4B" Grid.Row="1" BorderBrush="Gray" BorderThickness="7,0,0,1">
@@ -27,14 +27,14 @@
             </Grid.ColumnDefinitions>
             <Viewbox Stretch="Uniform" VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Column="0">
                 <StackPanel Orientation="Horizontal">
-                    <TextBlock Foreground="White" Text="{x:Bind Path=userScreen.lineSection.line, Mode=OneWay}"/>
+                    <TextBlock Foreground="White" Text="{x:Bind userScreen.lineSection.line, Mode=OneWay}"/>
                     <Border Background="Gray">
                         <TextBlock Foreground="LightGray" Text="{x:Bind userScreen.lineSection.lineComplete, Mode=OneWay}"/>
                     </Border>
                 </StackPanel>
             </Viewbox>
             <Viewbox Stretch="Uniform" Grid.Column="1">
-                <Button x:Name="playButton" Click="Play" Height="20">
+                <Button x:Name="playButton" Click="SpeakEvent" Height="20">
                     <Button.Background>
                         <ImageBrush Stretch="UniformToFill" ImageSource="Assets/speak.png"/>
                     </Button.Background>
