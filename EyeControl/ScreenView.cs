@@ -67,7 +67,10 @@ namespace EyeControl
         public void UpdateLineComplete(string wordComplete)
         {
             if (wordComplete != "")
-                lineComplete = wordComplete.Substring(line.Length);
+            {
+                string lastWord = line.Split(' ').Last();
+                lineComplete = wordComplete.Substring(lastWord.Length);
+            }
             else
                 lineComplete = "";
         }

@@ -117,6 +117,10 @@ namespace EyeControl
 
         public string GetWordComplete(string prefix)
         {
+            if (prefix == "")
+            {
+                return "";
+            }
             Dictionary<string, int> reducedDict = ReduceVocabularyByPrefix(prefix);
             var sortedDict = from entry in reducedDict orderby entry.Value ascending select entry;
             if (sortedDict.Count() == 0)
@@ -183,7 +187,7 @@ namespace EyeControl
             mediaElement.AutoPlay = true;
             mediaElement.SetSource(stream, stream.ContentType);
             mediaElement.Play();
-            loggedInUser.UpdateVocbulary(currentLine);
+            foreach (string word in currentLine.Split(' ')) loggedInUser.UpdateVocbulary(word);
             logSection.AddLineToLog(currentLine);
             lineSection.EnterLine();
         }
@@ -191,7 +195,8 @@ namespace EyeControl
         public void HandleSpaceEvent()
         {
             lineSection.line = lineSection.line + " ";
-            lineSection.lineComplete = "";
+            string lastWord = lineSection.line.Split(' ').Last();
+            lineSection.UpdateLineComplete(loggedInUser.GetWordComplete(lastWord));
         }
 
         public void HandleBackspaceEvent()
