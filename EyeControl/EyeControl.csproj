@@ -99,6 +99,7 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Constants.cs" />
     <Compile Include="ScreenView.cs" />
     <Compile Include="IView.cs" />
     <Compile Include="MainPage.xaml.cs">

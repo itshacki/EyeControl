@@ -10,7 +10,7 @@
     <SplitView x:Name="MainSplitView" DisplayMode="CompactOverlay"  IsPaneOpen="False" 
                CompactPaneLength="50">
         <SplitView.Pane>
-            <StackPanel Background="Gray">
+            <StackPanel >
                 <Button x:Name="HamburgerButton" FontFamily="Segoe MDL2 Assets" Content="&#xE700;" FontSize="20"
                     Width="50" Height="50" Background="Transparent" Click="HamburgerButton_Click"/>
                 <StackPanel Orientation="Horizontal">
@@ -32,21 +32,25 @@
                     <Button x:Name="MenuWordCompletion" FontFamily="Segoe MDL2 Assets" Content="&#xE7E6;" FontSize="20"
                         Width="50" Height="50" Background="Transparent"/>
                     <TextBlock Text="Word completion" FontSize="18" VerticalAlignment="Center" />
+                    <ToggleSwitch x:Name="wordCompetionSwitch" IsOn="True" FlowDirection="RightToLeft" MinWidth="100"/>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
                     <Button x:Name="MenuWordSuggestion" FontFamily="Segoe MDL2 Assets" Content="&#xE71C;" FontSize="20"
                         Width="50" Height="50" Background="Transparent"/>
                     <TextBlock Text="Word Suggestion" FontSize="18" VerticalAlignment="Center" />
+                    <ToggleSwitch x:Name="wordSuggestionSwitch" FlowDirection="RightToLeft" MinWidth="100"/>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
                     <Button x:Name="MenuSilentMode" FontFamily="Segoe MDL2 Assets" Content="&#xE74F;" FontSize="20"
                         Width="50" Height="50" Background="Transparent"/>
                     <TextBlock Text="Silent mode" FontSize="18" VerticalAlignment="Center" />
+                    <ToggleSwitch x:Name="silentMode" FlowDirection="RightToLeft" MinWidth="100"/>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
                     <Button x:Name="MenuLanguage" FontFamily="Segoe MDL2 Assets" Content="&#xE8C1;" FontSize="20"
                         Width="50" Height="50" Background="Transparent"/>
                     <TextBlock Text="Language" FontSize="18" VerticalAlignment="Center" />
+                    <ComboBox x:Name="languageCombo" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                 </StackPanel>
             </StackPanel>
         </SplitView.Pane>
@@ -117,7 +121,7 @@
                                     <TextBlock Foreground="DimGray" Text="{x:Bind userScreen.clusterSection.north.up, Mode=OneWay}"/>
                                 </Viewbox>
                                 <Viewbox Stretch="Uniform" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                    <Image Source="{x:Bind userScreen.clusterSection.north.upImg, Mode=OneWay}"/>
+                                    <TextBlock FontFamily="Segoe MDL2 Assets" Text="{x:Bind userScreen.clusterSection.north.upImg, Mode=OneWay}"/>
                                 </Viewbox>
                             </Grid>
                             <Grid Grid.Row="1" Grid.Column="1">
@@ -125,7 +129,7 @@
                                     <TextBlock Foreground="White" Text="{x:Bind userScreen.clusterSection.north.center, Mode=OneWay}"/>
                                 </Viewbox>
                                 <Viewbox Stretch="Uniform" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                    <Image Source="{x:Bind userScreen.clusterSection.north.centerImg, Mode=OneWay}"/>
+                                    <TextBlock FontFamily="Segoe MDL2 Assets" Text="{x:Bind userScreen.clusterSection.north.centerImg, Mode=OneWay}"/>
                                 </Viewbox>
                             </Grid>
                             <Grid Grid.Row="2" Grid.Column="1">
@@ -133,7 +137,7 @@
                                     <TextBlock Foreground="Orange" Text="{x:Bind userScreen.clusterSection.north.down, Mode=OneWay}"/>
                                 </Viewbox>
                                 <Viewbox Stretch="Uniform" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                    <Image Source="{x:Bind userScreen.clusterSection.north.downImg, Mode=OneWay}"/>
+                                    <TextBlock FontFamily="Segoe MDL2 Assets" Text="{x:Bind userScreen.clusterSection.north.downImg, Mode=OneWay}"/>
                                 </Viewbox>
                             </Grid>
                             <Grid Grid.Row="1" Grid.Column="0">
@@ -141,7 +145,7 @@
                                     <TextBlock Foreground="Gray" Text="{x:Bind userScreen.clusterSection.north.left, Mode=OneWay}"/>
                                 </Viewbox>
                                 <Viewbox Stretch="Uniform" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                    <Image Source="{x:Bind userScreen.clusterSection.north.leftImg, Mode=OneWay}"/>
+                                    <TextBlock FontFamily="Segoe MDL2 Assets" Text="{x:Bind userScreen.clusterSection.north.leftImg, Mode=OneWay}"/>
                                 </Viewbox>
                             </Grid>
                             <Grid Grid.Row="1" Grid.Column="2">
@@ -149,7 +153,7 @@
                                     <TextBlock Foreground="DarkOrange" Text="{x:Bind userScreen.clusterSection.north.right, Mode=OneWay}"/>
                                 </Viewbox>
                                 <Viewbox Stretch="Uniform" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                    <Image Source="{x:Bind userScreen.clusterSection.north.rightImg, Mode=OneWay}"/>
+                                    <TextBlock FontFamily="Segoe MDL2 Assets" Text="{x:Bind userScreen.clusterSection.north.rightImg, Mode=OneWay}"/>
                                 </Viewbox>
                             </Grid>
                         </Grid>
@@ -157,7 +161,7 @@
                             <TextBlock Foreground="DimGray" Text="{x:Bind userScreen.clusterSection.north.single, Mode=OneWay}"/>
                         </Viewbox>
                         <Viewbox Margin="20" RelativePanel.AlignHorizontalCenterWithPanel="True" RelativePanel.AlignVerticalCenterWithPanel="True">
-                            <Image Source="{x:Bind userScreen.clusterSection.north.singleImg, Mode=OneWay}"/>
+                            <TextBlock FontFamily="Segoe MDL2 Assets" Text="{x:Bind userScreen.clusterSection.north.singleImg, Mode=OneWay}"/>
                         </Viewbox>
                     </RelativePanel>
                 </Grid>
@@ -180,7 +184,7 @@
                                     <TextBlock Foreground="DimGray" Text="{x:Bind userScreen.clusterSection.west.up, Mode=OneWay}"/>
                                 </Viewbox>
                                 <Viewbox Stretch="Uniform" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                    <Image Source="{x:Bind userScreen.clusterSection.west.upImg, Mode=OneWay}"/>
+                                    <TextBlock FontFamily="Segoe MDL2 Assets" Text="{x:Bind userScreen.clusterSection.west.upImg, Mode=OneWay}"/>
                                 </Viewbox>
                             </Grid>
                             <Grid Grid.Row="1" Grid.Column="1">
@@ -188,7 +192,7 @@
                                     <TextBlock Foreground="White" Text="{x:Bind userScreen.clusterSection.west.center, Mode=OneWay}"/>
                                 </Viewbox>
                                 <Viewbox Stretch="Uniform" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                    <Image Source="{x:Bind userScreen.clusterSection.west.centerImg, Mode=OneWay}"/>
+                                    <TextBlock FontFamily="Segoe MDL2 Assets" Text="{x:Bind userScreen.clusterSection.west.centerImg, Mode=OneWay}"/>
                                 </Viewbox>
                             </Grid>
                             <Grid Grid.Row="2" Grid.Column="1">
@@ -196,7 +200,7 @@
                                     <TextBlock Foreground="Orange" Text="{x:Bind userScreen.clusterSection.west.down, Mode=OneWay}"/>
                                 </Viewbox>
                                 <Viewbox Stretch="Uniform" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                    <Image Source="{x:Bind userScreen.clusterSection.west.downImg, Mode=OneWay}"/>
+                                    <TextBlock FontFamily="Segoe MDL2 Assets" Text="{x:Bind userScreen.clusterSection.west.downImg, Mode=OneWay}"/>
                                 </Viewbox>
                             </Grid>
                             <Grid Grid.Row="1" Grid.Column="0">
@@ -204,7 +208,7 @@
                                     <TextBlock Foreground="Gray" Text="{x:Bind userScreen.clusterSection.west.left, Mode=OneWay}"/>
                                 </Viewbox>
                                 <Viewbox Stretch="Uniform" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                    <Image Source="{x:Bind userScreen.clusterSection.west.leftImg, Mode=OneWay}"/>
+                                    <TextBlock FontFamily="Segoe MDL2 Assets" Text="{x:Bind userScreen.clusterSection.west.leftImg, Mode=OneWay}"/>
                                 </Viewbox>
                             </Grid>
                             <Grid Grid.Row="1" Grid.Column="2">
@@ -212,7 +216,7 @@
                                     <TextBlock Foreground="DarkOrange" Text="{x:Bind userScreen.clusterSection.west.right, Mode=OneWay}"/>
                                 </Viewbox>
                                 <Viewbox Stretch="Uniform" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                    <Image Source="{x:Bind userScreen.clusterSection.west.rightImg, Mode=OneWay}"/>
+                                    <TextBlock FontFamily="Segoe MDL2 Assets" Text="{x:Bind userScreen.clusterSection.west.rightImg, Mode=OneWay}"/>
                                 </Viewbox>
                             </Grid>
                         </Grid>
@@ -220,7 +224,7 @@
                             <TextBlock Foreground="Gray" Text="{x:Bind userScreen.clusterSection.west.single, Mode=OneWay}"/>
                         </Viewbox>
                         <Viewbox Margin="20" RelativePanel.AlignHorizontalCenterWithPanel="True" RelativePanel.AlignVerticalCenterWithPanel="True">
-                            <Image Source="{x:Bind userScreen.clusterSection.west.singleImg, Mode=OneWay}"/>
+                            <TextBlock FontFamily="Segoe MDL2 Assets" Text="{x:Bind userScreen.clusterSection.west.singleImg, Mode=OneWay}"/>
                         </Viewbox>
                     </RelativePanel>
                 </Grid>
@@ -243,7 +247,7 @@
                                     <TextBlock Foreground="DimGray" Text="{x:Bind userScreen.clusterSection.center.up, Mode=OneWay}"/>
                                 </Viewbox>
                                 <Viewbox Stretch="Uniform" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                    <Image Source="{x:Bind userScreen.clusterSection.center.upImg, Mode=OneWay}"/>
+                                    <TextBlock FontFamily="Segoe MDL2 Assets" Text="{x:Bind userScreen.clusterSection.center.upImg, Mode=OneWay}"/>
                                 </Viewbox>
                             </Grid>
                             <Grid Grid.Row="1" Grid.Column="1">
@@ -251,7 +255,7 @@
                                     <TextBlock Foreground="White" Text="{x:Bind userScreen.clusterSection.center.center, Mode=OneWay}"/>
                                 </Viewbox>
                                 <Viewbox Stretch="Uniform" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                    <Image Source="{x:Bind userScreen.clusterSection.center.centerImg, Mode=OneWay}"/>
+                                    <TextBlock FontFamily="Segoe MDL2 Assets" Text="{x:Bind userScreen.clusterSection.center.centerImg, Mode=OneWay}"/>
                                 </Viewbox>
                             </Grid>
                             <Grid Grid.Row="2" Grid.Column="1">
@@ -259,7 +263,7 @@
                                     <TextBlock Foreground="Orange" Text="{x:Bind userScreen.clusterSection.center.down, Mode=OneWay}"/>
                                 </Viewbox>
                                 <Viewbox Stretch="Uniform" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                    <Image Source="{x:Bind userScreen.clusterSection.center.downImg, Mode=OneWay}"/>
+                                    <TextBlock FontFamily="Segoe MDL2 Assets" Text="{x:Bind userScreen.clusterSection.center.downImg, Mode=OneWay}"/>
                                 </Viewbox>
                             </Grid>
                             <Grid Grid.Row="1" Grid.Column="0">
@@ -267,7 +271,7 @@
                                     <TextBlock Foreground="Gray" Text="{x:Bind userScreen.clusterSection.center.left, Mode=OneWay}"/>
                                 </Viewbox>
                                 <Viewbox Stretch="Uniform" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                    <Image Source="{x:Bind userScreen.clusterSection.center.leftImg, Mode=OneWay}"/>
+                                    <TextBlock FontFamily="Segoe MDL2 Assets" Text="{x:Bind userScreen.clusterSection.center.leftImg, Mode=OneWay}"/>
                                 </Viewbox>
                             </Grid>
                             <Grid Grid.Row="1" Grid.Column="2">
@@ -275,7 +279,7 @@
                                     <TextBlock Foreground="DarkOrange" Text="{x:Bind userScreen.clusterSection.center.right, Mode=OneWay}"/>
                                 </Viewbox>
                                 <Viewbox Stretch="Uniform" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                    <Image Source="{x:Bind userScreen.clusterSection.center.rightImg, Mode=OneWay}"/>
+                                    <TextBlock FontFamily="Segoe MDL2 Assets" Text="{x:Bind userScreen.clusterSection.center.rightImg, Mode=OneWay}"/>
                                 </Viewbox>
                             </Grid>
                         </Grid>
@@ -283,7 +287,7 @@
                             <TextBlock Foreground="White" Text="{x:Bind userScreen.clusterSection.center.single, Mode=OneWay}"/>
                         </Viewbox>
                         <Viewbox Margin="20" RelativePanel.AlignHorizontalCenterWithPanel="True" RelativePanel.AlignVerticalCenterWithPanel="True">
-                            <Image Source="{x:Bind userScreen.clusterSection.center.singleImg, Mode=OneWay}"/>
+                            <TextBlock FontFamily="Segoe MDL2 Assets" Text="{x:Bind userScreen.clusterSection.center.singleImg, Mode=OneWay}"/>
                         </Viewbox>
                     </RelativePanel>
                 </Grid>
@@ -306,7 +310,7 @@
                                     <TextBlock Foreground="DimGray" Text="{x:Bind userScreen.clusterSection.east.up, Mode=OneWay}"/>
                                 </Viewbox>
                                 <Viewbox Stretch="Uniform" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                    <Image Source="{x:Bind userScreen.clusterSection.east.upImg, Mode=OneWay}"/>
+                                    <TextBlock FontFamily="Segoe MDL2 Assets" Text="{x:Bind userScreen.clusterSection.east.upImg, Mode=OneWay}"/>
                                 </Viewbox>
                             </Grid>
                             <Grid Grid.Row="1" Grid.Column="1">
@@ -314,7 +318,7 @@
                                     <TextBlock Foreground="White" Text="{x:Bind userScreen.clusterSection.east.center, Mode=OneWay}"/>
                                 </Viewbox>
                                 <Viewbox Stretch="Uniform" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                    <Image Source="{x:Bind userScreen.clusterSection.east.centerImg, Mode=OneWay}"/>
+                                    <TextBlock FontFamily="Segoe MDL2 Assets" Text="{x:Bind userScreen.clusterSection.east.centerImg, Mode=OneWay}"/>
                                 </Viewbox>
                             </Grid>
                             <Grid Grid.Row="2" Grid.Column="1">
@@ -322,7 +326,7 @@
                                     <TextBlock Foreground="Orange" Text="{x:Bind userScreen.clusterSection.east.down, Mode=OneWay}"/>
                                 </Viewbox>
                                 <Viewbox Stretch="Uniform" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                    <Image Source="{x:Bind userScreen.clusterSection.east.downImg, Mode=OneWay}"/>
+                                    <TextBlock FontFamily="Segoe MDL2 Assets" Text="{x:Bind userScreen.clusterSection.east.downImg, Mode=OneWay}"/>
                                 </Viewbox>
                             </Grid>
                             <Grid Grid.Row="1" Grid.Column="0">
@@ -330,7 +334,7 @@
                                     <TextBlock Foreground="Gray" Text="{x:Bind userScreen.clusterSection.east.left, Mode=OneWay}"/>
                                 </Viewbox>
                                 <Viewbox Stretch="Uniform" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                    <Image Source="{x:Bind userScreen.clusterSection.east.leftImg, Mode=OneWay}"/>
+                                    <TextBlock FontFamily="Segoe MDL2 Assets" Text="{x:Bind userScreen.clusterSection.east.leftImg, Mode=OneWay}"/>
                                 </Viewbox>
                             </Grid>
                             <Grid Grid.Row="1" Grid.Column="2">
@@ -338,7 +342,7 @@
                                     <TextBlock Foreground="DarkOrange" Text="{x:Bind userScreen.clusterSection.east.right, Mode=OneWay}"/>
                                 </Viewbox>
                                 <Viewbox Stretch="Uniform" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                    <Image Source="{x:Bind userScreen.clusterSection.east.rightImg, Mode=OneWay}"/>
+                                    <TextBlock FontFamily="Segoe MDL2 Assets" Text="{x:Bind userScreen.clusterSection.east.rightImg, Mode=OneWay}"/>
                                 </Viewbox>
                             </Grid>
                         </Grid>
@@ -346,7 +350,7 @@
                             <TextBlock Foreground="DarkOrange" Text="{x:Bind userScreen.clusterSection.east.single, Mode=OneWay}"/>
                         </Viewbox>
                         <Viewbox Margin="20" RelativePanel.AlignHorizontalCenterWithPanel="True" RelativePanel.AlignVerticalCenterWithPanel="True">
-                            <Image Source="{x:Bind userScreen.clusterSection.east.singleImg, Mode=OneWay}"/>
+                            <TextBlock FontFamily="Segoe MDL2 Assets" Text="{x:Bind userScreen.clusterSection.east.singleImg, Mode=OneWay}"/>
                         </Viewbox>
                     </RelativePanel>
                 </Grid>
@@ -370,7 +374,7 @@
                                     <TextBlock Foreground="DimGray" Text="{x:Bind userScreen.clusterSection.south.up, Mode=OneWay}"/>
                                 </Viewbox>
                                 <Viewbox Stretch="Uniform" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                    <Image Source="{x:Bind userScreen.clusterSection.south.upImg, Mode=OneWay}"/>
+                                    <TextBlock FontFamily="Segoe MDL2 Assets" Text="{x:Bind userScreen.clusterSection.south.upImg, Mode=OneWay}"/>
                                 </Viewbox>
                             </Grid>
                             <Grid Grid.Row="1" Grid.Column="1">
@@ -378,7 +382,7 @@
                                     <TextBlock Foreground="White" Text="{x:Bind userScreen.clusterSection.south.center, Mode=OneWay}"/>
                                 </Viewbox>
                                 <Viewbox Stretch="Uniform" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                    <Image Source="{x:Bind userScreen.clusterSection.south.centerImg, Mode=OneWay}"/>
+                                    <TextBlock FontFamily="Segoe MDL2 Assets" Text="{x:Bind userScreen.clusterSection.south.centerImg, Mode=OneWay}"/>
                                 </Viewbox>
                             </Grid>
                             <Grid Grid.Row="2" Grid.Column="1">
@@ -386,7 +390,7 @@
                                     <TextBlock Foreground="Orange" Text="{x:Bind userScreen.clusterSection.south.down, Mode=OneWay}"/>
                                 </Viewbox>
                                 <Viewbox Stretch="Uniform" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                    <Image Source="{x:Bind userScreen.clusterSection.south.downImg, Mode=OneWay}"/>
+                                    <TextBlock FontFamily="Segoe MDL2 Assets" Text="{x:Bind userScreen.clusterSection.south.downImg, Mode=OneWay}"/>
                                 </Viewbox>
                             </Grid>
                             <Grid Grid.Row="1" Grid.Column="0">
@@ -394,7 +398,7 @@
                                     <TextBlock Foreground="Gray" Text="{x:Bind userScreen.clusterSection.south.left, Mode=OneWay}"/>
                                 </Viewbox>
                                 <Viewbox Stretch="Uniform" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                    <Image Source="{x:Bind userScreen.clusterSection.south.leftImg, Mode=OneWay}"/>
+                                    <TextBlock FontFamily="Segoe MDL2 Assets" Text="{x:Bind userScreen.clusterSection.south.leftImg, Mode=OneWay}"/>
                                 </Viewbox>
                             </Grid>
                             <Grid Grid.Row="1" Grid.Column="2">
@@ -402,7 +406,7 @@
                                     <TextBlock Foreground="DarkOrange" Text="{x:Bind userScreen.clusterSection.south.right, Mode=OneWay}"/>
                                 </Viewbox>
                                 <Viewbox Stretch="Uniform" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                    <Image Source="{x:Bind userScreen.clusterSection.south.rightImg, Mode=OneWay}"/>
+                                    <TextBlock FontFamily="Segoe MDL2 Assets" Text="{x:Bind userScreen.clusterSection.south.rightImg, Mode=OneWay}"/>
                                 </Viewbox>
                             </Grid>
                         </Grid>
@@ -410,7 +414,7 @@
                             <TextBlock Foreground="Orange" Text="{x:Bind userScreen.clusterSection.south.single, Mode=OneWay}"/>
                         </Viewbox>
                         <Viewbox Margin="20" RelativePanel.AlignHorizontalCenterWithPanel="True" RelativePanel.AlignVerticalCenterWithPanel="True">
-                            <Image Source="{x:Bind userScreen.clusterSection.south.singleImg, Mode=OneWay}"/>
+                            <TextBlock FontFamily="Segoe MDL2 Assets" Text="{x:Bind userScreen.clusterSection.south.singleImg, Mode=OneWay}"/>
                         </Viewbox>
                     </RelativePanel>
                 </Grid>

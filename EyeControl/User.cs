@@ -49,18 +49,19 @@ namespace EyeControl
 
         public void temp()
         {
+            var constants = new Constants();
             data.userPages.Add(new ClusterSection());
             data.userPages[0].north.SetElements("A", "B", "C", "D", "E", null);
             data.userPages[0].south.SetElements("G", "H", "I", "J", "K", null);
             data.userPages[0].west.SetElements("M", "N", "O", "P", "K", null);
             data.userPages[0].east.SetElements("R", "S", "T", "X", "Y", null);
-            data.userPages[0].center.SetElements("W", "V", null, null, null, null);
+            data.userPages[0].center.SetElements(null, null, null, null, null, null);
 
-            data.userPages[0].north.SetImgElements("null", "null", "null", "null", "null", "null");
-            data.userPages[0].south.SetImgElements("null", "null", "null", "null", "null", "null");
-            data.userPages[0].west.SetImgElements("null", "null", "null", "null", "null", "null");
-            data.userPages[0].east.SetImgElements("null", "null", "null", "null", "null", "null");
-            data.userPages[0].center.SetImgElements("null", "null", "Assets/hamburger.png", "Assets/back.png", "Assets/mute.png", "null");
+            data.userPages[0].north.SetImgElements(null, null, null, null, null, null);
+            data.userPages[0].south.SetImgElements(null, null, null, null, null, null);
+            data.userPages[0].west.SetImgElements(null, null, null, null, null, null);
+            data.userPages[0].east.SetImgElements(null, null, null, null, null, null);
+            data.userPages[0].center.SetImgElements(constants.simbols["space"], constants.simbols["backSpace"], constants.simbols["hamburger"], constants.simbols["nextPage"],constants.simbols["speak"], null);
 
             UpdateVocbulary("HELLO");
             UpdateVocbulary("HOME");
@@ -168,6 +169,8 @@ namespace EyeControl
         public async void HandleSpeakEvent(MediaElement mediaElement)
         {
             string currentLine = lineSection.line + lineSection.lineComplete;
+            if (currentLine == "")
+                return;
             SpeechSynthesisStream stream = await synth.SynthesizeTextToStreamAsync(currentLine);
             // if the SSML stream is not in the correct format throw an error message to the user
             if (stream == null)
@@ -185,53 +188,73 @@ namespace EyeControl
             lineSection.EnterLine();
         }
 
-        public void HandleClusterEvent(ICluster cluster)
+        public void HandleSpaceEvent()
         {
+            lineSection.line = lineSection.line + " ";
+            lineSection.lineComplete = "";
+        }
+
+        public void HandleBackspaceEvent()
+        {
+            if (lineSection.line.Length > 0)
+            {
+                lineSection.line = lineSection.line.Remove(lineSection.line.Length - 1);
+                string lastWord = lineSection.line.Split(' ').Last();
+                lineSection.UpdateLineComplete(loggedInUser.GetWordComplete(lastWord));
+            }
+        }
+
+        public string HandleClusterEvent(ICluster cluster)
+        {
+            string UIrequest = null;
             if (cluster.single != null)
             {
                 lineSection.AddElementToLine(cluster.single);
-                lineSection.UpdateLineComplete(loggedInUser.GetWordComplete(lineSection.line));
+                string lastWord = lineSection.line.Split(' ').Last();
+                lineSection.UpdateLineComplete(loggedInUser.GetWordComplete(lastWord));
                 SetPage(0);
-                return;
             }
-            if (cluster.singleImg != "null")
+            else if (cluster.singleImg != null)
             {
+                UIrequest = cluster.singleImg;
                 SetPage(0);
-                //TODO: set action
-                return;
             }
-            string north = null, east = null, west = null, south = null, center = null;
-            string northImg = "null", eastImg = "null", westImg = "null", southImg = "null", centerImg = "null";
-            if (cluster.up == null)
-                northImg = cluster.upImg;
             else
-                north = cluster.up;
-            if (cluster.right == null)
-                eastImg = cluster.rightImg;
-            else
-                east = cluster.right;
-            if (cluster.left == null)
-                westImg = cluster.leftImg;
-            else
-                west = cluster.left;
-            if (cluster.down == null)
-                southImg = cluster.downImg;
-            else
-                south = cluster.down;
-            if (cluster.center == null)
-                centerImg = cluster.centerImg;
-            else
-                center = cluster.center;
-            clusterSection.east.SetElements(null, null, null, null, null, east);
-            clusterSection.west.SetElements(null, null, null, null, null, west);
-            clusterSection.south.SetElements(null, null, null, null, null, south);
-            clusterSection.center.SetElements(null, null, null, null, null, center);
-            clusterSection.north.SetElements(null, null, null, null, null, north);
-            clusterSection.east.SetImgElements("null", "null", "null", "null", "null", eastImg);
-            clusterSection.west.SetImgElements("null", "null", "null", "null", "null", westImg);
-            clusterSection.south.SetImgElements("null", "null", "null", "null", "null", southImg);
-            clusterSection.center.SetImgElements("null", "null", "null", "null", "null", centerImg);
-            clusterSection.north.SetImgElements("null", "null", "null", "null", "null", northImg);
+            {
+                string north = null, east = null, west = null, south = null, center = null;
+                string northImg = null, eastImg = null, westImg = null, southImg = null, centerImg = null;
+                if (cluster.up == null)
+                    northImg = cluster.upImg;
+                else
+                    north = cluster.up;
+                if (cluster.right == null)
+                    eastImg = cluster.rightImg;
+                else
+                    east = cluster.right;
+                if (cluster.left == null)
+                    westImg = cluster.leftImg;
+                else
+                    west = cluster.left;
+                if (cluster.down == null)
+                    southImg = cluster.downImg;
+                else
+                    south = cluster.down;
+                if (cluster.center == null)
+                    centerImg = cluster.centerImg;
+                else
+                    center = cluster.center;
+                clusterSection.east.SetElements(null, null, null, null, null, east);
+                clusterSection.west.SetElements(null, null, null, null, null, west);
+                clusterSection.south.SetElements(null, null, null, null, null, south);
+                clusterSection.center.SetElements(null, null, null, null, null, center);
+                clusterSection.north.SetElements(null, null, null, null, null, north);
+                clusterSection.east.SetImgElements(null, null, null, null, null, eastImg);
+                clusterSection.west.SetImgElements(null, null, null, null, null, westImg);
+                clusterSection.south.SetImgElements(null, null, null, null, null, southImg);
+                clusterSection.center.SetImgElements(null, null, null, null, null, centerImg);
+                clusterSection.north.SetImgElements(null, null, null, null, null, northImg);
+            }
+            return UIrequest;
         }
         
     }

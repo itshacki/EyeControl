@@ -29,6 +29,7 @@ namespace EyeControl
             userScreen.test();
         }
 
+        
         /// <summary>
         /// this is invoked when the media element state is changing
         /// </summary>
@@ -46,6 +47,36 @@ namespace EyeControl
             }
         }
 
+        private void ExecuteUIAction(string simbol)
+        {
+            var constants = new Constants();
+            if (simbol == constants.simbols["speak"])
+            {
+                userScreen.HandleSpeakEvent(this.media);
+            }
+            else if (simbol == constants.simbols["hamburger"])
+            {
+                HamburgerButton_Click(speakButton, null);
+            }
+            else if (simbol == constants.simbols["space"])
+            {
+                userScreen.HandleSpaceEvent();
+            }
+            else if (simbol == constants.simbols["backSpace"])
+            {
+                userScreen.HandleBackspaceEvent();
+            }
+        }
+
+        private void HandleEvent(ICluster cluster)
+        {
+            string UIActionRequest = userScreen.HandleClusterEvent(cluster);
+            if (UIActionRequest != null)
+            {
+                ExecuteUIAction(UIActionRequest);
+            }
+        }
+
         private void HamburgerButton_Click(object sender, RoutedEventArgs e)
         {
             MainSplitView.IsPaneOpen = !MainSplitView.IsPaneOpen;
@@ -53,27 +84,27 @@ namespace EyeControl
 
         private void northEvent(object sender, RoutedEventArgs e)
         {
-            userScreen.HandleClusterEvent(userScreen.clusterSection.north);
+            HandleEvent(userScreen.clusterSection.north);
         }
 
         private void eastEvent(object sender, RoutedEventArgs e)
         {
-            userScreen.HandleClusterEvent(userScreen.clusterSection.east);
+            HandleEvent(userScreen.clusterSection.east);
         }
 
         private void westEvent(object sender, RoutedEventArgs e)
         {
-            userScreen.HandleClusterEvent(userScreen.clusterSection.west);
+            HandleEvent(userScreen.clusterSection.west);
         }
 
         private void southEvent(object sender, RoutedEventArgs e)
         {
-            userScreen.HandleClusterEvent(userScreen.clusterSection.south);
+            HandleEvent(userScreen.clusterSection.south);
         }
 
         private void centerEvent(object sender, RoutedEventArgs e)
         {
-            userScreen.HandleClusterEvent(userScreen.clusterSection.center);
+            HandleEvent(userScreen.clusterSection.center);
         }
 
         private void SpeakEvent(object sender, RoutedEventArgs e)

@@ -119,7 +119,11 @@ namespace EyeControl
 
         void SetPage(int pageIndex);
 
-        void HandleClusterEvent(ICluster cluster);
+        void HandleSpaceEvent();
+
+        void HandleBackspaceEvent();
+
+        string HandleClusterEvent(ICluster cluster);
 
         void HandleSpeakEvent(MediaElement mediaElement);
 
