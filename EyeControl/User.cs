@@ -20,7 +20,11 @@ namespace EyeControl
         // user log. Contains former phrases that had been written, with max capacity of _MAX_NUM_OF_LOG_LINES
         public string log { get; set; }
 
+        // A list containing user pages
         public List<IClusterSection> userPages { get; set; }
+
+        // A variable determining the current page
+        public int currentPage { get; set; }
 
         public static int _MAX_NUM_OF_LOG_LINES = 10;
         
@@ -31,6 +35,8 @@ namespace EyeControl
     {
         private UserData data;
 
+        public int currentPage { get { return data.currentPage; } set { data.currentPage = value; } }
+
         public User()
         {
             data = new UserData
@@ -38,8 +44,14 @@ namespace EyeControl
                 userName = "New User",
                 vocabulary = new Dictionary<string, int>(),
                 log = "",
-                userPages = new List<IClusterSection>()
+                userPages = new List<IClusterSection>(),
+                currentPage = 1
             };
+        }
+
+        public int GetNumOfUserPages()
+        {
+            return data.userPages.Count;
         }
 
         public User(string fromFile)
@@ -63,6 +75,19 @@ namespace EyeControl
             data.userPages[0].east.SetImgElements(null, null, null, null, null, null);
             data.userPages[0].center.SetImgElements(constants.simbols["space"], constants.simbols["backSpace"], constants.simbols["hamburger"], constants.simbols["nextPage"],constants.simbols["speak"], null);
 
+            data.userPages.Add(new ClusterSection());
+            data.userPages[1].north.SetElements("Hey", "I", "Need", "Help", "Water", null);
+            data.userPages[1].south.SetElements("Feel", "Bad", "Fine", "Hurt", "Hungry", null);
+            data.userPages[1].west.SetElements("High", "Low", "Moderate", "Hard", "Soft", null);
+            data.userPages[1].east.SetElements("Like", "Dislike", "Often", "Much", "Little", null);
+            data.userPages[1].center.SetElements(null, null, null, null, null, null);
+
+            data.userPages[1].north.SetImgElements(null, null, null, null, null, null);
+            data.userPages[1].south.SetImgElements(null, null, null, null, null, null);
+            data.userPages[1].west.SetImgElements(null, null, null, null, null, null);
+            data.userPages[1].east.SetImgElements(null, null, null, null, null, null);
+            data.userPages[1].center.SetImgElements(constants.simbols["space"], constants.simbols["backSpace"], constants.simbols["hamburger"], constants.simbols["previousPage"], constants.simbols["speak"], null);
+
             UpdateVocbulary("HELLO");
             UpdateVocbulary("HOME");
             UpdateVocbulary("HOME");
@@ -74,10 +99,10 @@ namespace EyeControl
             System.IO.File.WriteAllText(toFile, Newtonsoft.Json.JsonConvert.SerializeObject(data));
         }
 
-        public IClusterSection GetCurrentPage(int pageIndex)
+        public IClusterSection GetCurrentPage()
         {
             //TODO: add try&catch
-            return data.userPages[pageIndex];
+            return data.userPages[data.currentPage];
         }
 
         /// <summary>
@@ -115,12 +140,10 @@ namespace EyeControl
             return tightVocabulary;
         }
 
-        public string GetWordComplete(string prefix)
+        public string GetWordComplete(string prefix, bool wordCompleteFlag)
         {
-            if (prefix == "")
-            {
+            if ((prefix == "") || (wordCompleteFlag == false))
                 return "";
-            }
             Dictionary<string, int> reducedDict = ReduceVocabularyByPrefix(prefix);
             var sortedDict = from entry in reducedDict orderby entry.Value ascending select entry;
             if (sortedDict.Count() == 0)
@@ -153,9 +176,31 @@ namespace EyeControl
             loggedInUser.temp();
             SetPage(0);
         }
-        public void SetPage(int pageIndex)
+
+        public void GoToTheNextPage()
         {
-            IClusterSection currentPage = loggedInUser.GetCurrentPage(pageIndex);
+            if (loggedInUser.currentPage < (loggedInUser.GetNumOfUserPages() - 1))
+            {
+                loggedInUser.currentPage++;
+                SetPage(loggedInUser.currentPage);
+            }
+        }
+        public void GoToThePreviousPage()
+        {
+            if (loggedInUser.currentPage > 0)
+            {
+                loggedInUser.currentPage--;
+                SetPage(loggedInUser.currentPage);
+            }
+        }
+        public void GoToTheHomePage()
+        {
+            loggedInUser.currentPage=0;
+            SetPage(loggedInUser.currentPage);
+        }
+        private void SetPage(int pageIndex)
+        {
+            IClusterSection currentPage = loggedInUser.GetCurrentPage();
 
             clusterSection.north.SetElements(currentPage.north);
             clusterSection.south.SetElements(currentPage.south);
@@ -192,31 +237,31 @@ namespace EyeControl
             lineSection.EnterLine();
         }
 
-        public void HandleSpaceEvent()
+        public void HandleSpaceEvent(bool wordCompleteFlag)
         {
             lineSection.line = lineSection.line + " ";
             string lastWord = lineSection.line.Split(' ').Last();
-            lineSection.UpdateLineComplete(loggedInUser.GetWordComplete(lastWord));
+            lineSection.UpdateLineComplete(loggedInUser.GetWordComplete(lastWord, wordCompleteFlag));
         }
 
-        public void HandleBackspaceEvent()
+        public void HandleBackspaceEvent(bool wordCompleteFlag)
         {
             if (lineSection.line.Length > 0)
             {
                 lineSection.line = lineSection.line.Remove(lineSection.line.Length - 1);
                 string lastWord = lineSection.line.Split(' ').Last();
-                lineSection.UpdateLineComplete(loggedInUser.GetWordComplete(lastWord));
+                lineSection.UpdateLineComplete(loggedInUser.GetWordComplete(lastWord, wordCompleteFlag));
             }
         }
 
-        public string HandleClusterEvent(ICluster cluster)
+        public string HandleClusterEvent(ICluster cluster, bool wordCompleteFlag)
         {
             string UIrequest = null;
             if (cluster.single != null)
             {
                 lineSection.AddElementToLine(cluster.single);
                 string lastWord = lineSection.line.Split(' ').Last();
-                lineSection.UpdateLineComplete(loggedInUser.GetWordComplete(lastWord));
+                lineSection.UpdateLineComplete(loggedInUser.GetWordComplete(lastWord, wordCompleteFlag));
                 SetPage(0);
             }
             else if (cluster.singleImg != null)

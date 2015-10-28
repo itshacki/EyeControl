@@ -15,24 +15,24 @@
                     Width="50" Height="50" Background="Transparent" Click="HamburgerButton_Click"/>
                 <StackPanel Orientation="Horizontal">
                     <Button x:Name="MenuNextPage" FontFamily="Segoe MDL2 Assets" Content="&#xE72A;" FontSize="20"
-                    Width="50" Height="50" Background="Transparent"/>
+                    Width="50" Height="50" Background="Transparent" Click="MenuNextPage_Click"/>
                     <TextBlock Text="Next Page" FontSize="18" VerticalAlignment="Center" />
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
                     <Button x:Name="MenuPreviousPage" FontFamily="Segoe MDL2 Assets" Content="&#xE72B;" FontSize="20"
-                        Width="50" Height="50" Background="Transparent"/>
+                        Width="50" Height="50" Background="Transparent" Click="MenuPreviousPage_Click"/>
                     <TextBlock Text="Previous Page" FontSize="18" VerticalAlignment="Center" />
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
                     <Button x:Name="MenuHomePage" FontFamily="Segoe MDL2 Assets" Content="&#xE10F;" FontSize="20"
-                        Width="50" Height="50" Background="Transparent"/>
+                        Width="50" Height="50" Background="Transparent" Click="MenuHomePage_Click"/>
                     <TextBlock Text="Home Page" FontSize="18" VerticalAlignment="Center" />
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
                     <Button x:Name="MenuWordCompletion" FontFamily="Segoe MDL2 Assets" Content="&#xE7E6;" FontSize="20"
                         Width="50" Height="50" Background="Transparent"/>
                     <TextBlock Text="Word completion" FontSize="18" VerticalAlignment="Center" />
-                    <ToggleSwitch x:Name="wordCompetionSwitch" IsOn="True" FlowDirection="RightToLeft" MinWidth="100"/>
+                    <ToggleSwitch x:Name="wordCompletionSwitch" IsOn="True" FlowDirection="RightToLeft" MinWidth="100"/>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
                     <Button x:Name="MenuWordSuggestion" FontFamily="Segoe MDL2 Assets" Content="&#xE71C;" FontSize="20"

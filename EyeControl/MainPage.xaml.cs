@@ -60,21 +60,36 @@ namespace EyeControl
             }
             else if (simbol == constants.simbols["space"])
             {
-                userScreen.HandleSpaceEvent();
+                userScreen.HandleSpaceEvent(wordCompletionSwitch.IsOn);
             }
             else if (simbol == constants.simbols["backSpace"])
             {
-                userScreen.HandleBackspaceEvent();
+                userScreen.HandleBackspaceEvent(wordCompletionSwitch.IsOn);
             }
         }
 
         private void HandleEvent(ICluster cluster)
         {
-            string UIActionRequest = userScreen.HandleClusterEvent(cluster);
+            string UIActionRequest = userScreen.HandleClusterEvent(cluster, wordCompletionSwitch.IsOn);
             if (UIActionRequest != null)
             {
                 ExecuteUIAction(UIActionRequest);
             }
+        }
+
+        private void MenuNextPage_Click(object sender, RoutedEventArgs e)
+        {
+            userScreen.GoToTheNextPage();
+        }
+
+        private void MenuPreviousPage_Click(object sender, RoutedEventArgs e)
+        {
+            userScreen.GoToThePreviousPage();
+        }
+
+        private void MenuHomePage_Click(object sender, RoutedEventArgs e)
+        {
+            userScreen.GoToTheHomePage();
         }
 
         private void HamburgerButton_Click(object sender, RoutedEventArgs e)

@@ -117,13 +117,17 @@ namespace EyeControl
         ILineSection lineSection { get; set; }
         IClusterSection clusterSection { get; set; }
 
-        void SetPage(int pageIndex);
+        void GoToTheNextPage();
 
-        void HandleSpaceEvent();
+        void GoToThePreviousPage();
 
-        void HandleBackspaceEvent();
+        void GoToTheHomePage();
 
-        string HandleClusterEvent(ICluster cluster);
+        void HandleSpaceEvent(bool wordCompleteFlag);
+
+        void HandleBackspaceEvent(bool wordCompleteFlag);
+
+        string HandleClusterEvent(ICluster cluster, bool wordCompleteFlag);
 
         void HandleSpeakEvent(MediaElement mediaElement);
 
